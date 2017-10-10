@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Service and Repair</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Service Centers</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">Service</a>
+                    </li>
+                    <li>
+                        <a href="#">Repair</a>
+                    </li>
+                    <li>
+                        <a href="#">Contacts</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+
+      <div id="map" style="width:100%;height:500px"></div>
+
+      <script>
+        function myMap() {
+          var mapCanvas = document.getElementById("map");
+          var myCenter = new google.maps.LatLng(38, -96);
+          var mapOptions = {
+            center: myCenter,
+            zoom: 5
+          };
+          var map = new google.maps.Map(mapCanvas, mapOptions);
+          var iconBase = 'https://maps.google.com/mapfiles/kml/paddle/';
+          var icons = {
+            greenstar: {
+              icon: iconBase + 'grn-stars-lv.png'
+            },
+            redstar: {
+              icon: iconBase + 'red-stars-lv.png'
+            },
+            yellowstar: {
+              icon: iconBase + 'ylw-stars-lv.png'
+            }
+          };
+
+          function addMarker(feature) {
+            var marker = new google.maps.Marker({
+              position: feature.position,
+              icon: icons[feature.type].icon,
+              map: map
+            });
+            marker.setMap(map);
+            google.maps.event.addListener(marker, 'click', function() {
+              var infowindow = new google.maps.InfoWindow({
+                content: "Service Center"
+              });
+              infowindow.open(map, marker);
+            });
+          }
+          var features = [{
+            position: new google.maps.LatLng(42, -75),
+            type: 'greenstar'
+          }, {
+            position: new google.maps.LatLng(37, -90),
+            type: 'yellowstar'
+          }, {
+            position: new google.maps.LatLng(39, -108),
+            type: 'redstar'
+          }]
+          for (var i = 0, feature; feature = features[i]; i++) {
+            addMarker(feature);
+          }
+        }
+      </script>
+
+      <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+
+      <div class="container">
+        <h2>Service Table</h2>
+
+        <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Service Center</th>
+              <th>Type</th>
+              <th>Region</th>
+              <th>City</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Location1</td>
+              <td>3rd party</td>
+              <td>Region1</td>
+              <td>City1</td>
+              <td>Country1</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+<!--
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Service</h1>
+                <p class="lead">Table</p>
+                <ul class="list-unstyled">
+                    <li>Bootstrap v3.3.7</li>
+                    <li>jQuery v1.11.1</li>
+                </ul>
+            </div>
+        </div>
+      -->
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
